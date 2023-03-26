@@ -1,0 +1,32 @@
+# in below technique i am goign to every second element and comparing it with left and right elements, if any of
+# left or right is greater than the middle element then just swap them, and do this till end of the loop
+# o(n) complexity
+
+# other technique would be sorting and filling the tad ends of the array in the auxilliary array
+
+#arr1 = [1, 2, 3, 4, 5, 6, 7]
+
+arr1 = [7, 6, 5, 4, 3, 2, 1]
+
+arr2 = [9, 6, 8, 3, 7]
+
+arr3 = [6, 9, 2, 5, 1, 4]
+
+
+def swap_left_right(arr):
+    for i in range(1, len(arr), 2):
+        if arr[i-1] > arr[i]:
+            tmp = arr[i]
+            arr[i] = arr[i-1]
+            arr[i-1] = tmp
+        elif i+1 < len(arr) and arr[i+1] > arr[i]:
+            tmp = arr[i]
+            arr[i] = arr[i+1]
+            arr[i+1] = tmp
+    return arr
+
+print(swap_left_right(arr1))
+
+print(swap_left_right(arr2))
+
+print(swap_left_right(arr3))
