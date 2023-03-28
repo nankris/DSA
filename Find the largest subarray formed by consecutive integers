@@ -1,0 +1,38 @@
+arr1 = [2, 0, 2, 1, 4, 3, 1, 0]
+
+#arr1 = [5, 4, 3, 2, 1, 1, 0]
+
+def finding_consecutive_elem_subarray(arr1):
+    max_length = 1
+    for i in range(len(arr1)):
+        already_seen_dct = {}
+        max_seen_in_subarray = -9999
+        min_seen_in_subarray = 9999
+        already_seen_dct[arr1[i]] = 'seen'
+        for j in range(i+1, len(arr1)):
+            if arr1[j] > arr1[i] and max_seen_in_subarray < arr1[j]:
+                max_seen_in_subarray = arr1[j]
+            elif arr1[i] > arr1[j] and max_seen_in_subarray < arr1[i]:
+                max_seen_in_subarray = arr1[i]
+            
+            if arr1[j] < arr1[i] and max_seen_in_subarray > arr1[j]:
+                min_seen_in_subarray = arr1[j]
+            elif arr1[i] < arr1[j] and max_seen_in_subarray > arr1[i]:
+                min_seen_in_subarray = arr1[i]
+                
+            if arr1[j] in already_seen_dct.keys():
+                break
+
+            already_seen_dct[arr1[j]] = 'seen'
+
+            if  (max_seen_in_subarray-min_seen_in_subarray) == len(already_seen_dct.keys())-1 and max_length < len(already_seen_dct.keys()):
+                #pdb.set_trace()
+                max_length = len(already_seen_dct.keys())
+                fin_start_elem_index = i
+                fin_end_elem_index = j
+                #print(i, j, arr1[i], arr1[j], max_length, already_seen_dct)
+                #break
+
+    return max_length, fin_start_elem_index, fin_end_elem_index 
+
+print(finding_consecutive_elem_subarray(arr1))
