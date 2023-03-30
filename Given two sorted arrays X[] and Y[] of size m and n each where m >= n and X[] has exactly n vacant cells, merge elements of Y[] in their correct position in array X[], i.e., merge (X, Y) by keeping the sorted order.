@@ -1,0 +1,46 @@
+arr1 = [0, 2, 0, 3, 0, 5, 6, 0, 0]
+arr2 = [1, 8, 9, 10, 15]
+
+# [1, 2, 3, 5, 6, 8, 9, 10, 15]
+
+k = 0
+cnt = 0
+
+def moveZeroesEnd(arr1):
+    cnt = 0
+    for i in range(len(arr1)):
+        if arr1[i] ==0:
+            cnt = cnt+1
+        else:
+            tmp = arr1[i]
+            arr1[i - cnt] = tmp
+            arr1[i] = 0
+    print(arr1)
+    return arr1
+
+def sortTwoArraya(arr1, arr2):
+    k = 0
+    l = 0
+    for i in range(len(arr1)):
+        if k <= len(arr2)-1 and arr1[i] > arr2[k]:
+            tmp = arr1[i]
+            arr1[i] = arr2[k]
+            arr2[k] = tmp
+
+            #print(arr1, arr2, k)
+            for j in range(1, len(arr2)):
+                if arr2[j-1] > arr2[j]:
+                    tmp2 = arr2[j-1]
+                    arr2[j-1] = arr2[j]
+                    arr2[j] = tmp2 
+    print(arr1, arr2)
+    for i in range(len(arr1)):
+        if arr1[i] == 0:
+            arr1[i] = arr2[l]
+            arr2[l] = 0
+            l = l+1
+    print(arr1, arr2)
+
+arr1 = moveZeroesEnd(arr1)
+print(arr1)
+sortTwoArraya(arr1, arr2)
