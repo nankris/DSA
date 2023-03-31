@@ -1,0 +1,20 @@
+def find_recursive_combinations(arr1, k, subarrays, out=(), i=0):
+    # returning and adding the elements inside subarrays
+    if k == 0:
+        subarrays.add(out)
+        return
+
+    for j in range(i, len(arr1)):
+        find_recursive_combinations(arr1, k-1, subarrays, out+(arr1[j], ), j+1)
+ 
+#arr1 = [1, 2, 3, 4, 5]
+#arr1 = [1, 2, 3, 4]
+arr1 = [1, 2, 1]
+k = 2
+ 
+subarrays = set()
+ 
+# process elements from left to right
+find_recursive_combinations(arr1, k, subarrays)
+print(subarrays)
+print(len(subarrays))
