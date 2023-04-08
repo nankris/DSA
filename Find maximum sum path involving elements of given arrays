@@ -1,0 +1,84 @@
+X = [3, 6, 7, 8, 10, 12, 15, 18, 100]
+Y = [1, 2, 3, 5, 7, 9, 10, 11, 15, 16, 18, 25, 50]
+
+# max sum path
+# maximum sum must be printed
+
+detour_points_x = []
+detour_points_y = []
+k = 0
+X_sum = 0
+Y_sum = 0
+max_sum = 0
+
+for i in range(len(Y)):
+
+    Y_sum = Y_sum+Y[i]
+
+    if Y[i] == X[k]:
+        detour_points_x.append(i)
+        detour_points_y.append(k)
+        print("this we are adding", X[k])
+        X_sum = X_sum + X[k] 
+        k = k+1
+
+        if X_sum > Y_sum:
+            max_sum = max_sum + X_sum
+            X_sum = 0
+            Y_sum = 0
+        else:
+            max_sum = max_sum + Y_sum
+            X_sum = 0
+            Y_sum = 0
+
+    if X[k] < Y[i]:
+        X_sum = X_sum + X[k]
+        print("this we are adding 2", X[k])
+        k = k+1
+        if Y[i] == X[k]:
+            detour_points_x.append(i)
+            detour_points_y.append(k)
+            
+            X_sum = X_sum + X[k]
+            print("this we are adding 2", X[k])
+            k = k+1
+
+            if X_sum > Y_sum:
+                max_sum = max_sum + X_sum
+                X_sum = 0
+                Y_sum = 0
+            else:
+                max_sum = max_sum + Y_sum
+                X_sum = 0
+                Y_sum = 0
+
+
+tmp = detour_points_x
+detour_points_x = detour_points_y
+detour_points_y = tmp
+
+print(detour_points_x, detour_points_y, max_sum)
+
+
+# last elements are not checked in above logic
+end_sum_x = 0
+end_sum_y = 0
+
+print(detour_points_x[-1], len(X), detour_points_y[-1], len(Y))
+
+if detour_points_x[-1] < len(X):
+    for i in range(detour_points_x[-1]+1, len(X)):
+        print("X of i:", X[i])
+        end_sum_x = end_sum_x + X[i]  
+print(end_sum_x)
+if detour_points_y[-1] < len(Y):
+    for i in range(detour_points_y[-1]+1, len(Y)):
+        print("Y of i:",Y[i])
+        end_sum_y = end_sum_y + Y[i]
+print(end_sum_y)
+if end_sum_y > end_sum_x:
+    max_sum = max_sum + end_sum_y
+else:
+    max_sum = max_sum + end_sum_x
+
+print(detour_points_x, detour_points_y, max_sum)
