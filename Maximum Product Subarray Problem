@@ -1,0 +1,37 @@
+arr1 = [-6, 4, -5, 8, -10, 0, 8]
+
+
+import sys
+ 
+# Returns the product of max product subarray.
+def maxSubarrayProduct(arr, n):
+    max_product = -999999
+    product = 1
+    for i in range(len(arr)):
+        if arr[i] == 0:
+            product = 1
+        
+        product = arr[i]*product
+        if max_product < product:
+            max_product = product
+        #print(max_product, product)
+    
+
+    result=list(reversed(arr))
+    
+    product = 1
+
+    for i in range(len(result)):
+        product = result[i]*product
+        if result[i] == 0:
+            product = 1
+        if max_product < product:
+            max_product = product
+       
+
+    return max_product
+    
+arr = [4, 3, 0, -6, 4, -5, 8, -10, 0, 8]
+
+n = len(arr)
+print("Maximum Subarray product is", maxSubarrayProduct(arr, n))
