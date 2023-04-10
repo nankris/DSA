@@ -1,0 +1,37 @@
+def max_seq_continous_1(arr1, k):
+    start_index = 0
+    end_index = -9999
+    max_length = -9999
+    max_len = 0
+    counter_zero = 0
+
+    for i in range(len(arr1)):
+        #print(i)
+        if arr1[i] == 1:
+            if max_len == 0:
+                start_index = i
+            max_len += 1
+
+        if arr1[i] == 0:
+            counter_zero += 1
+        
+        if counter_zero == k and arr1[i] == 0:
+            remember_zero_index = i
+
+        if  counter_zero <= k:
+            #print(max_length, i, start_index, i-start_index+1 )
+            if max_length < i - start_index + 1:
+                max_length = i-start_index+1
+                start = start_index
+        else:
+            start_index = remember_zero_index+1
+            counter_zero = counter_zero-1
+            max_len_after_counter = max_length
+            #print("else condition:", max_len_after_counter, start, start_index, counter_zero)
+
+    print(start, max_length)
+
+arr1 = [1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 0]
+k = 2
+
+max_seq_continous_1(arr1, k)
