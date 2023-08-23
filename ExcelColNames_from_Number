@@ -1,0 +1,41 @@
+# Runtime and memory Optimized
+def convertToTitle(columnNumber):
+	alph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+	alph_dct = {}
+	for i in range(len(alph)):
+		alph_dct[i] = alph[i] 
+	chars = []
+	while columnNumber > 0:
+		columnNumber -= 1
+		remainder = columnNumber % 26
+		chars.insert(0, alph_dct[remainder])
+		columnNumber //= 26
+	return ''.join(chars)
+
+# Memory optimized, worst runtime
+def convertToTitle(columnNumber):
+	alph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+	alph_dct = {}
+	for i in range(len(alph)):
+		alph_dct[i] = alph[i] 
+	chars = []
+	while columnNumber > 0:
+		columnNumber -= 1
+		remainder = columnNumber % 26
+		chars.append(alph_dct[remainder])
+		columnNumber //= 26
+	return ''.join(reversed(chars))
+
+# Runtime optimized, worst memory
+def convertToTitle(columnNumber):
+	alph = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+	alph_dct = {}
+	for i in range(len(alph)):
+		alph_dct[i] = alph[i] 
+	final_str = ''
+	while columnNumber > 0:
+		columnNumber -= 1
+		remainder = columnNumber % 26
+    final_str = alph_dct[remainder] + final_str
+		columnNumber //= 26
+	return final_str
