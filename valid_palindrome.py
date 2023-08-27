@@ -1,4 +1,4 @@
-# Using moving window approach
+# Using two pointer approach
 def isPalindrome(s):
 
     left = 0
