@@ -1,0 +1,17 @@
+class Solution:                
+    def beautifulSubstrings(self, s: str, k: int) -> int:
+        len_s = len(s)
+        cnt = 0
+        for i in range(len_s):
+            vow = 0
+            cons = 0
+            for j in range(i, len_s):
+                char = s[j]
+                if char in ['a', 'e', 'i', 'o', 'u']:
+                    vow +=1
+                else:
+                    cons += 1 
+                if (vow == cons and (vow*cons)%k == 0):
+                    cnt +=1
+        return cnt
+
