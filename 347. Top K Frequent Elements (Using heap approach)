@@ -1,0 +1,22 @@
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        dct_freq = {}
+        for i in range(len(nums)):
+            if nums[i] in dct_freq.keys():
+                dct_freq[nums[i]] += 1
+            else:
+                dct_freq[nums[i]] = 1
+        heap = []
+        for key in dct_freq.keys():
+            heapq.heappush(heap, [-dct_freq[key], key])
+        
+        n = 0
+        fin_lst = []
+        while n<k:
+            heap_pop = heapq.heappop(heap)
+            fin_lst.append(heap_pop[1])
+            n += 1
+        return fin_lst
+
+
+
