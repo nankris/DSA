@@ -1,0 +1,15 @@
+class Solution:
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+        min_dist = 0
+        heap_q = []
+        for lst in points:
+            dist = math.sqrt(lst[0]*lst[0] + lst[1]*lst[1])
+            heapq.heappush(heap_q, [dist, [lst[0], lst[1]]])
+            #hash_map.append([dist, lst[0], lst[1]])
+        n = 0
+        op = [] 
+        while n < k:
+            fst, scnd = heapq.heappop(heap_q)
+            op.append(scnd)
+            n = n+1
+        return op
