@@ -1,0 +1,18 @@
+class Solution:
+    def checkValidString(self, s: str) -> bool:
+        max_ele = 0
+        min_ele = 0
+        # This for loop checks if there are too many ) for *, (
+        for i in s:
+            max_ele = max_ele - 1 if i == ")" else max_ele + 1
+            if max_ele < 0:
+                return False
+        # This for loop checks if there are too many ( for *, )
+        for i in reversed(s):
+            min_ele = min_ele - 1 if i == "(" else min_ele + 1
+            if min_ele < 0:
+                return False
+        return True 
+
+                
+
