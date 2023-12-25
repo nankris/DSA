@@ -1,0 +1,24 @@
+class Solution:
+    def swapNodes(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        temp = head
+        dummy = ListNode(0)
+        dummy.next = head
+        lst_of_nodes = []
+        while temp is not None:
+            lst_of_nodes.append(temp.val)
+            temp = temp.next
+        
+        tmp = lst_of_nodes[k-1]
+        lst_of_nodes[k-1] = lst_of_nodes[-k]
+        lst_of_nodes[-k] = tmp
+        
+        temp2 = dummy.next
+        i = 0        
+        while temp2 is not None:
+            temp2.val = lst_of_nodes[i]
+            i = i+1
+            temp2 = temp2.next
+
+        return dummy.next
+
+
