@@ -1,0 +1,20 @@
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        if num1 == "0" or num2 == "0":
+            return "0"
+
+        tot_sm = 0
+        num1 = num1[::-1]
+
+        for i in range(len(num2)):
+            fin_sm = 0
+            for j in range(len(num1)):
+                sm = int(num1[j])*int(num2[i]) 
+                fin_sm += sm*(10**j)
+            tot_sm += fin_sm*(10**(len(num2)-1-i))
+
+        return str(int(tot_sm))
+
+
+
+
