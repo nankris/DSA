@@ -1,0 +1,43 @@
+class Solution:
+    def countPairs(self, deliciousness: List[int]) -> int:
+        result = 0
+        freq_dct = {}
+        for i in deliciousness:
+            if i not in freq_dct.keys():
+                freq_dct[i] = 1
+            else:
+                freq_dct[i] += 1
+        
+        mod = 10**9 + 7
+        for key, value in freq_dct.items():
+            for i in range(22):
+                val = 2**i - key
+                if val in freq_dct.keys() and val >= 0:
+                    if val == key:
+                        result = result + value*(value-1)
+                    else:
+                        result = result + value*freq_dct[val]
+        return (result//2) % (mod)
+
+        # We will get time limit excceded error with below approach
+        # def square_two(num):
+        #     return num > 0 and (num & (num - 1)) == 0
+        #     # while num%2 == 0:
+        #     #     if num == 1:
+        #     #         return True
+        #     #     num = num//2
+        #     # if num == 1:
+        #     #     return True         
+        #     # return False
+
+        # cnt = 0
+        # for i in range(len(deliciousness)):
+        #     for j in range(i+1, len(deliciousness)):
+        #         if square_two(deliciousness[i] + deliciousness[j]):
+        #             cnt += 1
+        # return cnt
+
+
+
+
+
