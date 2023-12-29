@@ -1,0 +1,23 @@
+class Solution:
+    def findWinners(self, matches: List[List[int]]) -> List[List[int]]:
+        loses_dct = {}
+        for i in matches:
+            if i[0] not in loses_dct:
+                loses_dct[i[0]] = 0
+            if i[1] not in loses_dct:
+                loses_dct[i[1]] = 1
+            else:
+                loses_dct[i[1]] += 1
+        answer = [[], []]
+        for key, val in loses_dct.items():
+            if val == 0:
+                answer[0].append(key)
+            if val == 1:
+                answer[1].append(key)
+        return [sorted(d) for d in answer]
+                
+
+
+
+
+        
