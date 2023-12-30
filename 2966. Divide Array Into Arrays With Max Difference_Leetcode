@@ -1,0 +1,20 @@
+class Solution:
+    def divideArray(self, nums: List[int], k: int) -> List[List[int]]:
+        if len(nums)%3 != 0:
+            return []
+
+        sort_lst = sorted(nums)
+        #for i in range(len(sort_lst)):
+        fin_ans = []
+        i = 0
+        while i+2 < len(nums):
+            if sort_lst[i+2] - sort_lst[i]  <= k:
+                fin_ans.append(sort_lst[i:i+3])
+                i = i + 3
+            else:
+                return []
+
+        return fin_ans
+
+        
+        
