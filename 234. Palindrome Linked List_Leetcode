@@ -1,0 +1,53 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        fast = head
+        slow = head
+
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+        
+        # Odd case
+        # Initially: 1 -> 2 -> 3 -> 2 -> 1
+        # After the reversal: 1 -> 2 -> 3 <- 2 <- 1
+
+        # Even case
+        # Initially: 1 -> 2 -> 3 -> 3 -> 2 -> 1
+        # After the reversal: 1 -> 2 -> 3 -> 3 <- 2 <- 1
+
+        # The above example is the reason why it compares perfectly in case of odd or even
+        prev = None
+        next_ = None
+        curr = slow
+        while curr:
+            next_ = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next_
+        
+
+        while prev:
+            if head.val != prev.val:
+                return False
+            head = head.next
+            prev = prev.next
+        return True
+
+        # Second approach is below
+
+        
+        # str_num = ""
+        # temp = head
+        # while temp:
+        #     str_num = str_num+str(temp.val)
+        #     temp = temp.next
+        
+        # if str_num == str_num[::-1]:
+        #     return True
+        # else:
+        #     return False
