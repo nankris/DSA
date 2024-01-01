@@ -1,0 +1,62 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+# Idea is simple
+# Reverse the linked list
+# And then use curr_max element and remove all elements that are less than curr_max
+# again reverse the linked list
+
+class Solution:
+    def removeNodes(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # Approach should be: Reverse first
+        # and remove the nodes which are smaller than the current max
+        # again reverse the linked list
+        prev = None
+        next_ = None
+        mid = head
+
+        while mid:
+            next_ = mid.next
+            mid.next = prev
+            prev = mid
+            mid = next_
+        
+        dummy = ListNode()
+        dummy.next = prev
+        curr = prev
+        first = dummy  # Use a dummy node to simplify handling the first node
+        curr_max = float('-inf')
+
+        while curr:
+            if curr.val >= curr_max:
+                curr_max = curr.val
+                first = curr
+            else:
+                first.next = curr.next
+
+            curr = curr.next
+
+        prev = None
+        next_ = None
+        mid = dummy.next
+
+        while mid:
+            next_ = mid.next
+            mid.next = prev
+            prev = mid
+            mid = next_
+
+        return prev
+
+            
+
+
+
+
+
+
+
+        
