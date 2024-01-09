@@ -1,0 +1,23 @@
+# The time complexity of this code is O(log n), where 'n' is the length of the input list nums
+class Solution:
+    def singleNonDuplicate(self, nums: List[int]) -> int:
+        hlf = len(nums)//2
+
+        if len(nums) == 1:
+            return nums[0]
+
+        if hlf%2 == 0:
+            if nums[hlf] == nums[hlf-1]:
+                return self.singleNonDuplicate(nums[0:hlf+1])
+            elif nums[hlf] == nums[hlf+1]:
+                return self.singleNonDuplicate(nums[hlf:])
+            else:
+                return nums[hlf]
+        else:
+            if nums[hlf] == nums[hlf-1]:
+                return self.singleNonDuplicate(nums[hlf+1:])
+            elif nums[hlf] == nums[hlf+1]:
+                return self.singleNonDuplicate(nums[0:hlf])
+
+
+            
