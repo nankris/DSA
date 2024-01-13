@@ -1,0 +1,32 @@
+class Solution:
+    def minSteps(self, s: str, t: str) -> int:
+        s_dct = {}
+        t_dct = {}
+        for i in s:
+            if i not in s_dct.keys():
+                s_dct[i] = 1
+            else:
+                s_dct[i] += 1
+            
+        for i in t:
+            if i not in t_dct.keys():
+                t_dct[i] = 1
+            else:
+                t_dct[i] += 1
+
+        fin_cnt = 0
+        for key, value in t_dct.items():
+            if key not in s_dct.keys():
+                fin_cnt += value
+            else:
+                if value == s_dct[key]:
+                    continue
+                elif value > s_dct[key]:
+                    fin_cnt += value-s_dct[key]
+        return fin_cnt
+
+
+
+
+
+
