@@ -1,0 +1,17 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        # observations
+        # Cannot get only consecutive (as we can change the pattern in between)
+        # you only use the previous value and the one before
+        # Only it can skipt its next and next depending on its benefit
+        # DP problem
+        if len(nums) == 1:
+            return nums[0]
+        elif len(nums) == 2:
+            return max(nums[0], nums[1])
+        dp = [0]*len(nums)
+        dp[0] = nums[0]
+        dp[1] = max(nums[0], nums[1])
+        for i in range(2, len(nums)):
+            dp[i] = max(dp[i-1], dp[i-2]+nums[i])
+        return dp[-1]
