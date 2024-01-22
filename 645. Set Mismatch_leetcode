@@ -1,0 +1,16 @@
+class Solution:
+    def findErrorNums(self, nums: List[int]) -> List[int]:
+        # n(n+1)/2 doesnt work as always the difference is 1 only
+        n = len(nums)
+        s = sum(nums)
+        s_set = sum(set(nums))
+        actu_sum = (n*(n+1))/2
+
+        return [s-s_set, int(actu_sum-s_set)]
+
+
+
+
+
+
+
