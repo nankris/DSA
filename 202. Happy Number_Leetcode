@@ -1,0 +1,24 @@
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        sm = n
+        seen_elems = []
+        while sm not in seen_elems:
+            tmp_sm = 0
+            val = sm
+            seen_elems.append(val)
+            while val >= 10:
+                remainder = val%10
+                val = val//10
+                tmp_sm = tmp_sm + remainder*remainder
+            sm = val*val + tmp_sm
+        if sm == 1:
+            return True
+        else:
+            return False
+
+
+
+
+
+
+
