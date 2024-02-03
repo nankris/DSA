@@ -1,0 +1,41 @@
+class Solution:
+    def sequentialDigits(self, low: int, high: int) -> List[int]:
+        # When the number becomes greater than high then stop
+        # So the thing is remove fist and one at end
+        # We can maintain a queue -> remove top, and 
+        # add elem at end till last num is 9 and you cannot go beyond
+        # So we start with the len(lst) as len(low_digits)
+        # and we end with the len(lst) as len(high_digits)
+        low_len = len(str(low))
+        high_len = len(str(high))
+        que = []
+        dig = [1,2,3,4,5,6,7,8,9]
+
+        fin_lst = []
+        curr_len = low_len
+        for i in range(curr_len):
+            que.append(dig[i % 9])
+
+        while len(que) <= high_len:
+            while que[-1] < 9 and int(''.join(map(str, que))) <= high:
+                fin_lst.append(int(''.join(map(str, que))))
+                que.pop(0)
+                que.append(que[-1]+1)
+            if int(''.join(map(str, que))) <= high:
+                fin_lst.append(int(''.join(map(str, que))))
+            curr_len = curr_len+1
+            que = []
+            for i in range(curr_len):
+                que.append(dig[i % 9])
+
+        filtered_numbers = [num for num in fin_lst if low <= num <= high]
+        return filtered_numbers
+
+        #return [1234,2345,3456,4567,5678,6789,12345]
+
+
+
+
+
+
+
