@@ -1,0 +1,32 @@
+from functools import cache
+import time
+
+def fibonacci_basic(n):
+    if n <= 1:
+        return n
+    else:
+        return fibonacci_basic(n - 1) + fibonacci_basic(n - 2)
+
+@cache
+def fibonacci_memoized(n):
+    if n <= 1:
+        return n
+    else:
+        return fibonacci_memoized(n - 1) + fibonacci_memoized(n - 2)
+
+
+
+# Time comparison
+start_time = time.time()
+result_basic = fibonacci_basic(30)
+end_time_basic = time.time() - start_time
+
+start_time = time.time()
+result_memoized = fibonacci_memoized(30)
+end_time_memoized = time.time() - start_time
+
+print("Result without memoization:", result_basic)
+print("Time without memoization:", end_time_basic)
+
+print("\nResult with memoization:", result_memoized)
+print("Time with memoization:", end_time_memoized)
