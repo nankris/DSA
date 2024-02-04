@@ -1,0 +1,31 @@
+class Solution:
+    def findPaths(self, m: int, n: int, maxMove: int, startRow: int, startColumn: int) -> int:
+        # right, down, up, left
+        steps = [(0, 1), (1, 0), (-1, 0), (0, -1)]
+        memoization_dict = {}
+
+        def step_1(row_, col_, maxMove, memoization_dict):
+            if row_ >= m or row_ < 0 or col_ >= n or col_ < 0:
+                return 1
+            if maxMove == 0:
+                return 0
+
+            if (row_, col_, maxMove) in memoization_dict:
+                return memoization_dict[(row_, col_, maxMove)]
+
+            tot_steps = 0
+            for a, b in steps:
+                tot_steps = tot_steps + step_1(row_ + a, col_ + b, maxMove-1, memoization_dict)
+
+            memoization_dict[(row_, col_, maxMove)] = tot_steps
+
+            return tot_steps
+        
+        tot_steps = step_1(startRow, startColumn, maxMove, memoization_dict)
+        
+        return tot_steps%(10**9+7)
+
+
+
+
+
