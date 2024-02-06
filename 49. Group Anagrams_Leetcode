@@ -1,0 +1,15 @@
+class Solution:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+
+        sorted_strs = []
+        for i in range(len(strs)):
+            sorted_strs.append(tuple(sorted(strs[i])))
+        
+        anagram_dct = {}
+        for i in range(len(sorted_strs)):
+            if sorted_strs[i] not in anagram_dct.keys():
+                anagram_dct[sorted_strs[i]] = [strs[i]]
+            else:
+                anagram_dct[sorted_strs[i]].append(strs[i])
+        
+        return [value for value in anagram_dct.values()]
