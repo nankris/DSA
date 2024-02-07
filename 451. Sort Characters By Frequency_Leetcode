@@ -1,0 +1,12 @@
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        frequency_dict = {}
+        for i in range(len(s)):
+            if s[i] in frequency_dict.keys():
+                frequency_dict[s[i]] += 1
+            else:
+                frequency_dict[s[i]] = 1
+        sorted_tuples = sorted(frequency_dict.items(), key=lambda x: (x[1], x[0]), reverse=True)
+        return ''.join(char * freq for char, freq in sorted_tuples)
+
+
