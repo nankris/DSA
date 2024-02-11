@@ -1,0 +1,12 @@
+class Solution:
+    # Going right to left will do the trick
+    def removeAnagrams(self, words: List[str]) -> List[str]:
+        to_remove = []
+        fin_lst = []
+        for i in range(len(words)-2, -1, -1):
+            if sorted(words[i]) == sorted(words[i+1]):
+                to_remove.append(i+1)
+        for i in range(len(words)):
+            if i not in to_remove:
+                fin_lst.append(words[i])
+        return fin_lst
