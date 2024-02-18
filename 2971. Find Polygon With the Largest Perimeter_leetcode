@@ -1,0 +1,22 @@
+class Solution:
+    def largestPerimeter(self, nums: List[int]) -> int:
+        # To find polygon with largest possible permimeter
+        # Sort them first
+        # Then make sure you start from right and go on and sum from right
+        nums = sorted(nums)
+        sm = 0 
+        for i in range(len(nums)-1, -1, -1):
+            left = 0
+            right = i-1
+            while left < right:
+                sm = sum(nums[left:right+1])
+                if sm > nums[i]:
+                    perimeter = sum(nums[left:right+1]) + nums[i]
+                    return perimeter
+                else:
+                    left += 1
+        return -1
+
+
+
+
