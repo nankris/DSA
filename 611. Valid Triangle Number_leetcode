@@ -1,0 +1,36 @@
+# Included this with initial thought process to converging to the final optimized approach
+
+class Solution:
+    def triangleNumber(self, nums: List[int]) -> int:
+        # Before that sort this list of digits
+        # Basically three numbers where largest number is less than  
+        # sum of other two numbers
+        # a + b > c, b + c > a, and a + c > b
+        # We have to find out how many such combinations exist
+        # -> (2, 2, 3) 2+2, 2+3, 2+3 all three greater than remaining number
+        # We can use two pointers technique
+        # Instead of above, if we just take largest number and compare the sum of other two numbers,
+        # We can make sure the other two conditions satisfy as well (a + b > c, b + c > a, and a + c > b)
+        nums = sorted(nums)
+        cnt = 0
+        for i in range(len(nums)-1, -1, -1 ):
+            left = 0
+            right = i-1
+            while left < right:
+                if nums[left] + nums[right] > nums[i]:
+                    cnt += right-left
+                    right -= 1
+                else:
+                    left += 1
+        return cnt
+
+
+
+
+
+
+
+
+
+
+        
