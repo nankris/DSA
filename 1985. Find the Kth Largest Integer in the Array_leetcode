@@ -1,0 +1,8 @@
+class Solution:
+    def kthLargestNumber(self, nums: List[str], k: int) -> str:
+        heap_ = []
+        for i in range(len(nums)):
+            heapq.heappush(heap_, int(nums[i]))
+            if len(heap_) > k:
+                heapq.heappop(heap_)
+        return str(heap_[0])
