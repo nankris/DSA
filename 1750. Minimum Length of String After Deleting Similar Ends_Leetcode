@@ -1,0 +1,30 @@
+class Solution:
+    def minimumLength(self, s: str) -> int:
+        left = 0
+        right = len(s)-1
+        s_ = list(s)
+
+        # For single characters
+        if len(s_) == 1:
+            return 1
+
+        while left < right:
+            if s_[left] == s_[right]:
+                if s_[left] == s_[left+1]:
+                    left += 1
+                if s_[right] == s_[right-1]:
+                    right -= 1
+                if s_[left] != s_[left+1] and s_[right] != s_[right-1]:
+                    left += 1
+                    right -= 1
+            else:
+                break
+        
+        # for "abbbbbbbbbbbbbbbbbbba"
+        if s_[left] == s_[left-1] and len(s[left:right+1]) == 1:
+            return 0
+
+        return len(''.join(s_[left:right+1]))
+
+
+
