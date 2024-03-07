@@ -1,0 +1,12 @@
+class Solution:
+    def minAddToMakeValid(self, s: str) -> int:
+        valid_paren = []
+        cnt = 0
+        for i in range(len(s)):
+            if s[i] == "(":
+                valid_paren.append(s[i])
+            if s[i] == ")" and len(valid_paren) > 0:
+                valid_paren.pop()
+            elif s[i] == ")" and len(valid_paren) == 0:
+                cnt += 1
+        return cnt + len(valid_paren)
