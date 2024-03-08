@@ -1,0 +1,14 @@
+class Solution:
+    def maxFrequencyElements(self, nums: List[int]) -> int:
+        cntr = Counter(nums)
+        cntr_sorted = sorted(cntr.items(), key=lambda x:x[1], reverse=True)
+
+        highest_freq = cntr_sorted[0][1]
+        sm = 0
+        for elem, freq in cntr_sorted:
+            if freq == highest_freq:
+                sm += freq
+            else:
+                return sm
+        return sm
+        
