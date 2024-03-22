@@ -1,0 +1,31 @@
+class Solution:
+    def pairSum(self, head: Optional[ListNode]) -> int:
+        slow = head
+        fast = head
+        len = 0
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            len += 1
+        
+        # Now slow pointer will be in middle
+        # Now reverse the linked list from middle
+        # Once you reach end, start adding 
+        prev_ = None
+        next_ = None
+        curr = slow
+        while curr:
+            next_ = curr.next
+            curr.next = prev_
+            prev_ = curr
+            curr = next_
+
+        max_sm = -9999
+        while prev_:
+            if head.val + prev_.val > max_sm:
+                max_sm = head.val + prev_.val
+            head = head.next
+            prev_ = prev_.next
+        return max_sm
+
+            
