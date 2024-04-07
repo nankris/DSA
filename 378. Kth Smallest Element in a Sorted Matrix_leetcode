@@ -1,0 +1,21 @@
+class Solution:
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        heap = []
+        for row in matrix:
+            for col_val in row:
+                heappush(heap, col_val)
+
+        for _ in range(k):
+            res = heappop(heap)
+        return res 
+
+
+
+class Solution:
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        appended_rows = []
+        for row in matrix:
+            appended_rows += row
+        
+        appended_rows.sort()
+        return appended_rows[k-1]
