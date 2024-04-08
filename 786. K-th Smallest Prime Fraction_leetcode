@@ -1,0 +1,17 @@
+class Solution:
+    def kthSmallestPrimeFraction(self, arr: List[int], k: int) -> List[int]:
+        heap = []
+        for i in range(len(arr)):
+            for j in range(i, len(arr)):
+                heapq.heappush(heap, arr[i]/arr[j])        
+
+        for _ in range(k):
+            resp = heappop(heap)   
+
+        for i in range(len(arr)):
+            for j in range(i, len(arr)):
+                if arr[i]/arr[j] == resp:
+                    return [arr[i], arr[j]]
+
+
+
