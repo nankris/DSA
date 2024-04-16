@@ -1,0 +1,44 @@
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def sumNumbers(self, root):
+        def dfs(root, curr_sm, result):
+            if root is None:
+                return ''
+            curr_sm = curr_sm + root.val
+            if not root.left and not root.right:
+                return curr_sm
+            left_sm = dfs(root.left, curr_sm, result)
+            print("left sum", left_sm)
+            result.append(left_sm)
+            right_sm = dfs(root.right, curr_sm, result)
+            result.append(right_sm)
+            print("right sum", right_sm, result)
+            return ''
+            #return left_sm + right_sm
+        result = []
+        dfs(root, '', result)
+        print("final result:", result)
+        return result
+
+# Create the tree
+root = TreeNode('a')
+root.left = TreeNode('b')
+root.right = TreeNode('c')
+root.left.left = TreeNode('d')
+root.left.right = TreeNode('e')
+
+# Create an instance of the Solution class and call the sumNumbers function
+solution = Solution()
+result = solution.sumNumbers(root)
+
+curr_max = result[0]
+for string in result:
+    if string != "":
+        if string > curr_max:
+            curr_max = string
+print(curr_max)
