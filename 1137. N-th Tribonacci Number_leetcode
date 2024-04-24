@@ -1,0 +1,17 @@
+class Solution:
+    def tribonacci(self, n: int) -> int:
+        # trib(3) = trib(2) + trib(1) + trib(0)
+        # trib(0) = 0
+        # trib(1) = 1
+        # trib(2) = 1
+        # trib(3) = 2
+        # trib(4) = 4
+        dp_trib = {}
+        dp_trib[0] = 0
+        dp_trib[1] = 1
+        dp_trib[2] = 1
+        for i in range(3,n+1):
+            dp_trib[i] = dp_trib[i-1] + dp_trib[i-2] + dp_trib[i-3]
+        return dp_trib[n]
+
+        
