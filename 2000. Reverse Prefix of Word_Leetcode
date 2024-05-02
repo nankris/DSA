@@ -1,0 +1,19 @@
+class Solution:
+    def reversePrefix(self, word: str, ch: str) -> str:
+        # you can go from left to right
+        # First time you see the target character
+        # notedown index
+        # convert to list
+        # Reverse till that point and append the end list
+        word_lst = list(word)
+        for i in range(len(word_lst)):
+            if word_lst[i] == ch:
+                first_part = word_lst[:i+1][::-1]
+                if i+1 < len(word_lst):
+                    second_part = word_lst[i+1:]
+                else:
+                    second_part = ""
+
+                return ''.join(first_part) + ''.join(second_part)
+        return word
+
