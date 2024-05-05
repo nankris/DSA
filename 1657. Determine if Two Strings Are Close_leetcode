@@ -1,0 +1,11 @@
+class Solution:
+    def closeStrings(self, word1: str, word2: str) -> bool:
+        hash_lst1 = Counter(word1)
+        hash_lst2 = Counter(word2)
+
+        if sorted(hash_lst1.keys()) == sorted(hash_lst2.keys()):
+            if sorted(hash_lst1.values()) == sorted(hash_lst2.values()):
+                return True
+
+        return False
+            
