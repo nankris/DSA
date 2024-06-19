@@ -1,0 +1,22 @@
+class Solution:
+    def asteroidCollision(self, asteroids: List[int]) -> List[int]:
+        # a < b, a is negative (a and b are in opposite)
+        # +ve should be on left and -ve should be on right to collide
+        # new entry to stack is not negative add
+        # If new entry is negative, check top element sign, and magnitude
+        # Check this until the top element magnitude is greater than the new negative number
+        # If new entry is positive -> You can add no matter what
+        stck = []
+        for i in asteroids:
+            while stck and stck[-1] > 0 and i < 0:
+                if stck[-1] == -i: # Means top one is positive, incoming is negative and are equal
+                    stck.pop()
+                    break
+                elif stck[-1] < -i: # Means top is positive but smaller than negative incoming
+                    stck.pop()
+                    continue
+                else: # Means top is positive but incoming is smaller and will be smashed
+                    break
+            else: # While got executed without break
+                stck.append(i) 
+        return stck
