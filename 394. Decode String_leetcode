@@ -1,0 +1,40 @@
+class Solution:
+    def decodeString(self, s: str) -> str:
+        # So by solving problems, it is clear that we have to use stack
+        # The first time you saw ] -> pop all till [ in stack
+        # After doing that multiply
+        fin_str = ''
+        fin_str_lst = []
+        fin_ans = []
+        stck = []
+        for i in s:
+            if i != "]":
+                stck.append(i)
+            else:
+                while stck[-1] != '[':
+                    fin_ans.append(stck.pop())
+                stck.pop() # popping [
+
+                int_ = ''
+                while stck and stck[-1].isdigit(): 
+                    int_ = stck.pop() + int_
+
+                fin_str = ''.join(fin_ans[::-1])            
+                fin_str = fin_str*int(int_)
+                if stck:
+                    stck.append(fin_str)
+                else:
+                    fin_str_lst.append(fin_str)
+                #print(fin_str_lst, int_, stck)
+                fin_ans = []
+
+        if stck:
+            for i in stck:
+                fin_str_lst.append(i)
+
+        return ''.join(fin_str_lst)
+
+
+
+
+
