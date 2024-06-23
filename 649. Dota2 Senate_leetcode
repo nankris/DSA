@@ -1,0 +1,25 @@
+class Solution:
+    def predictPartyVictory(self, senate: str) -> str:
+        #return "Radiant"
+        dire_ = deque()
+        radiant_ = deque()
+
+        for i in range(len(senate)):
+            if senate[i] == "D":
+                dire_.append(i)
+            if senate[i] == "R":
+                radiant_.append(i)
+
+        n = len(senate)
+        while dire_ and radiant_:
+            if dire_[0] < radiant_[0]:
+                dire_.append(n)
+            else:
+                radiant_.append(n)
+            radiant_.popleft()
+            dire_.popleft()
+            n += 1
+
+        return "Radiant" if radiant_ else "Dire"    
+
+
