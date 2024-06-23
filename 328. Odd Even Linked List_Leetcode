@@ -1,0 +1,31 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def oddEvenList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # To solve this in O(n) complexity
+        # May be using pointers will work?
+        # 2 will be bought before 1,
+        # next 4 will be bought before 2 
+
+        #node_ = head
+        #while node_.next:
+        if not head or not head.next:
+            return head
+
+        left = head
+        right = head.next
+
+        while right and right.next:
+            tmp = right.next
+            right.next = tmp.next
+            tmp.next = left.next
+            left.next = tmp
+            left = left.next
+            right = right.next
+
+        return head
+
+
