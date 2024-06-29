@@ -1,0 +1,42 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def deleteNode(self, root: Optional[TreeNode], key: int) -> Optional[TreeNode]:
+        # if it is a child -> Just delete
+        # If it has only one child, then just delete and put the child in target position
+        # If it has 2 children -> 1) Replace it with greatest value from left subtree
+        # 2) Replace it with smallest value from right subtree
+        #return root
+
+        def get_largest_from_left(node_):
+            while node_.right:
+                node_ = node_.right
+            return node_
+        # Other approach people are saying is 
+        # In inorder traversal -> Pick the next node after deleting current node
+        # and recreate the BST again
+        if not root:
+            return
+        if root.val > key: # It should go to left, as key is smaller then root val
+            root.left = self.deleteNode(root.left, key)
+        elif root.val < key:
+            root.right = self.deleteNode(root.right, key)
+        else:
+            if not root.left:
+                root = root.right
+            elif not root.right:
+                root = root.left
+            else:
+                # Below code is to replace from largest value in left sub tree
+                temp = get_largest_from_left(root.left)
+                root.val = temp.val
+                # Once you replaced the value of root with largest value 
+                # You have to delete that particular value from left (As this time it is child it will be removed)
+                root.left = self.deleteNode(root.left, temp.val)
+        return root 
+
+
