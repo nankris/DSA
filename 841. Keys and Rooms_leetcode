@@ -1,0 +1,30 @@
+# Both dfs and bfs solutions
+class Solution:
+    def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
+        # Lets try bfs as well (we will use queue)
+
+        visited = set()
+        que = deque([0])
+
+        while que:
+            current_room = que.popleft()
+            if current_room not in visited:
+                visited.add(current_room)
+                for key in rooms[current_room]:
+                    if key not in visited:
+                        que.append(key)
+
+        return len(visited) == len(rooms)
+
+
+
+        # # Lets try dfs solution for this
+        # visited = set()
+        # def dfs(room):
+        #     if room in visited:
+        #         return
+        #     visited.add(room)
+        #     for key in rooms[room]:
+        #         dfs(key)
+        # dfs(0)
+        # return len(visited) == len(rooms)    
