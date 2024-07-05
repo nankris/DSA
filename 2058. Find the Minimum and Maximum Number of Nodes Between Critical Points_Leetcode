@@ -1,0 +1,29 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def nodesBetweenCriticalPoints(self, head: Optional[ListNode]) -> List[int]:
+        # 3, 5, 6 -> max is extremes, min distance is find difference between consicutive
+        temp = head
+        index_lst = []
+        i = 1
+        while temp.next:
+            if temp.next.next:
+                if temp.val > temp.next.val and temp.next.val < temp.next.next.val:
+                    index_lst.append(i+1)                
+                elif temp.val < temp.next.val and temp.next.val > temp.next.next.val:
+                    index_lst.append(i+1)
+            temp = temp.next
+            i += 1
+        if len(index_lst) >= 2:
+            maxDist = index_lst[-1] - index_lst[0]
+            # Below is for minDist calculatioon
+            minDist = 99999
+            for i in range(len(index_lst)):
+                if i+1 < len(index_lst):
+                    minDist = min(minDist, index_lst[i+1] - index_lst[i])
+            return [minDist, maxDist]
+        else:
+            return [-1, -1]
