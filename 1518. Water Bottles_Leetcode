@@ -1,0 +1,19 @@
+class Solution:
+    def numWaterBottles(self, numBottles: int, numExchange: int) -> int:
+        # ans = numBottles
+        # quo = numBottles
+        # while quo//numExchange != 0:
+        #     print(quo)
+        #     ans += quo//numExchange
+        #     quo = quo//numExchange + quo%numExchange
+        # return ans
+
+        # Lets solve this with recursion
+        def getexchange(n, e):
+            if n < e:
+                return 0
+            return n//e + getexchange(n//e+n%e, e)
+
+        return numBottles + getexchange(numBottles, numExchange) 
+
+
