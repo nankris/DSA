@@ -1,0 +1,54 @@
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def createBinaryTree(self, descriptions: List[List[int]]) -> Optional[TreeNode]:
+        # Output should be level order traversal
+        # Store it in hashmap -> start doing hashmap -> Then it will work
+        # Create two left and right hashmaps
+        left_hash = {}
+        right_hash = {}
+        parent_set = set()
+        child_set = set()
+        for i, j, k in descriptions:
+            parent_set.add(i)
+            child_set.add(j)
+            if k == 1:
+                left_hash[i] = j
+            else:
+                right_hash[i] = j
+        
+        root_node_val = (parent_set - child_set).pop()
+
+        print(root_node_val)
+
+        root_node = TreeNode(root_node_val, None, None)
+
+        que = []
+        que.append(root_node)
+
+        while que:
+            # Pop the first node in the queue
+            curr_node = que.pop(0)
+            curr_val = curr_node.val
+            
+            # If the current value has a left child, create the left child and add to queue
+            if curr_val in left_hash:
+                curr_node.left = TreeNode(left_hash[curr_val])
+                que.append(curr_node.left)
+                
+            # If the current value has a right child, create the right child and add to queue
+            if curr_val in right_hash:
+                curr_node.right = TreeNode(right_hash[curr_val])
+                que.append(curr_node.right)
+
+        return root_node
+
+
+
+
+
