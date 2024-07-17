@@ -1,0 +1,56 @@
+# Complex solution where we can solve it easily, but this i am just noting for a reference
+
+class Solution:
+    def delNodes(self, root: Optional[TreeNode], to_delete: List[int]) -> List[TreeNode]:
+        # Each node has a distinct value
+        # Lets do level order traversal and just add the roots in a list
+        # In first iteration, if we note down all the nodes whose next node we are going to delete
+        # Ex: If left node value is in target list
+        # Ex: If right node value is in target list
+        dummy = TreeNode(None, root, None)
+        que = deque([root])
+        fin_list = []
+        nodes_next_to_delete = []
+
+        if root.val in to_delete:
+            nodes_next_to_delete.append((dummy, "left"))
+
+        while que:
+            level_size = len(que)
+            for i in range(level_size):
+                curr_node = que.popleft()
+                if curr_node.left:
+                    if curr_node.left.val in to_delete:
+                        nodes_next_to_delete.append((curr_node, "left"))    
+                    que.append(curr_node.left)
+                if curr_node.right:
+                    if curr_node.right.val in to_delete:
+                        nodes_next_to_delete.append((curr_node, "right"))
+                    que.append(curr_node.right)
+
+        if root and root.val not in to_delete:
+            fin_list.append(root)
+
+
+        print(nodes_next_to_delete)
+
+        for node, direction in nodes_next_to_delete[::-1]:
+            tmp = node
+            next_node = getattr(tmp, direction)
+            if next_node:
+                if next_node.left:
+                    fin_list.append(next_node.left)
+                    next_node.left = None
+                if next_node.right:
+                    fin_list.append(next_node.right)
+                    next_node.right = None             
+            setattr(tmp, direction, None)
+
+        return fin_list
+
+
+
+
+
+
+
