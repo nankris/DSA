@@ -1,0 +1,39 @@
+class Solution:
+    def frequencySort(self, nums: List[int]) -> List[int]:
+        # Generally frequency means dictionary
+        # In one loop we will create dictionary
+        # Get all unique frequencies
+        # Go one frequency in each iteration
+
+        hash_map = {}
+        for i in nums:
+            if i not in hash_map:
+                hash_map[i] = ([1], i)
+            else:
+                hash_map[i][0][0] += 1 
+
+        new_hash = {}
+        for value in hash_map.values():
+            if value[0][0] not in new_hash:
+                new_hash[value[0][0]] = [value[0][0], value[1]]
+            else:            
+                new_hash[value[0][0]].append(value[1])
+
+        fin_list = sorted(list(new_hash.values()))
+        fin_ans = []
+        for elem in fin_list:
+            temp_lst = []
+            if len(elem) > 2:
+                temp_lst = sorted(elem[1:])[::-1]
+            if not temp_lst:
+                for j in elem[1:]:
+                    for i in range(elem[0]):
+                        fin_ans.append(j)
+            else:
+                for j in temp_lst:
+                    for i in range(elem[0]):
+                        fin_ans.append(j)
+        return fin_ans
+
+
+
