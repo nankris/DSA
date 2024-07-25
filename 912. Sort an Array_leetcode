@@ -1,0 +1,13 @@
+# We are using inbuilt library heapq to create heap data structure
+
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+        heap_ = []
+        for i in nums:
+            heapq.heappush(heap_, i)
+        
+        fin_lst = []
+        for i in range(len(nums)):
+            fin_lst.append(heapq.heappop(heap_))
+
+        return fin_lst
