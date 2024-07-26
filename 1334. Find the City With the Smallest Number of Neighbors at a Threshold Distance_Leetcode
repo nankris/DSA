@@ -1,0 +1,43 @@
+# 1334. Find the City With the Smallest Number of Neighbors at a Threshold Distance
+
+class Solution:
+    def findTheCity(self, n: int, edges: List[List[int]], distanceThreshold: int) -> int:
+        dist = [[1000000]*n for _ in range(n)]
+
+        for i in range(n):
+            dist[i][i] = 0
+
+        for edge in edges:
+            dist[edge[0]][edge[1]] = edge[2]
+            dist[edge[1]][edge[0]] = edge[2]
+        
+        # Floyd marshall algorithm
+        # Basically k is vertex
+        # i, j are indexes
+        for k in range(n):
+            for i in range(n):
+                for j in range(n):
+                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
+        
+
+        dist_cnt_lst = []
+        min_ = 9999999
+        for i in range(len(dist)):
+            cnt = 0
+            for k in dist[i]:
+                if k <= distanceThreshold:
+                    cnt += 1
+            if cnt < min_:
+                min_ = cnt
+            dist_cnt_lst.append((i, cnt))
+
+        sorted_dist_cnt_lst = sorted(dist_cnt_lst)
+
+        for res in dist_cnt_lst[::-1]:
+            if res[1] == min_:
+                return res[0]
+
+
+
+
+
