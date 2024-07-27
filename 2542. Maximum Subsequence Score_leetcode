@@ -1,0 +1,25 @@
+class Solution:
+    def maxScore(self, nums1: List[int], nums2: List[int], k: int) -> int:
+        # Heap
+        concat_lst = []     
+        for i in range(len(nums1)):
+           concat_lst.append((nums2[i], nums1[i]))
+        
+        sort_ = sorted(concat_lst, reverse=True)
+        print(sort_)
+
+        prefix_sum = 0
+        res = 0
+        heap_ = []
+        for i, j in sort_:
+            prefix_sum += j
+            heapq.heappush(heap_, j)
+
+            if len(heap_) == k:
+                x = prefix_sum*i
+                res = res if res > x else x
+                prefix_sum -= heapq.heappop(heap_)
+        return res
+
+
+
