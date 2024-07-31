@@ -1,0 +1,25 @@
+class Solution:
+    def successfulPairs(self, spells: List[int], potions: List[int], success: int) -> List[int]:
+        # End of the day we only need number of pairs
+        # We can sort potions
+        # For each spell check the atleast sucess value using Binary search
+        # Then just get the total length - curr_index as answer for that particular spell
+
+        fin_lst = []
+        sorted_potions = sorted(potions)
+        for i in spells:
+            l = 0
+            r = len(sorted_potions)
+            while l < r:
+                mid = (l+r)//2
+                if sorted_potions[mid]*i < success:
+                    l = mid + 1
+                else:
+                    r = mid
+
+            fin_lst.append(len(potions)-l)
+
+        return fin_lst
+
+
+
