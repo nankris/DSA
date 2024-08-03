@@ -1,0 +1,36 @@
+class Solution:
+    def hourscnt(self, piles, mid):
+        cnt = 0
+        for i in piles:
+            if i%mid != 0:
+                cnt += i//mid + 1
+            else:
+                cnt += i//mid
+        print(mid, cnt)
+        return cnt
+
+
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        # Sort
+        # Do binary search bet left and right
+        # upon getting mid -> use it to compute number of h it takes to complete each element
+        # If it exceeds h -> change left to left + 1
+        # If it is less than h -> change right to mid
+        # min -> 1, max -> max of piles
+
+        min_pile = 1
+        max_pile = max(piles)
+
+        while min_pile < max_pile:
+            mid = (min_pile+max_pile)//2
+            cnt = self.hourscnt(piles, mid)
+            if cnt > h:
+                min_pile = mid + 1 
+            else:
+                max_pile = mid
+        #if hourscnt(max_pile) 
+        return min_pile
+
+
+
+
