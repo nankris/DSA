@@ -1,0 +1,14 @@
+class Solution:
+    def rangeSum(self, nums: List[int], n: int, left: int, right: int) -> int:
+        subarr = []
+        for i in range(n):
+            sm = 0
+            for j in range(i, n):
+                sm += nums[j]
+                subarr.append(sm)
+        subarr_sorted = sorted(subarr)
+        mod = 10**9 + 7
+        return sum(subarr_sorted[left-1:right])%mod
+
+
+
