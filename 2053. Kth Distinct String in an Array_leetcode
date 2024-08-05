@@ -1,0 +1,14 @@
+class Solution:
+    def kthDistinct(self, arr: List[str], k: int) -> str:
+        cntr = Counter(arr)
+        t_k = 0
+        for i in arr:
+            if cntr[i] == 1:
+                t_k += 1
+                if t_k == k:
+                    return i
+
+        return ""
+
+
+        
