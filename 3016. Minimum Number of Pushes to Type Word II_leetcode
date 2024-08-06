@@ -1,0 +1,25 @@
+class Solution:
+    def minimumPushes(self, word: str) -> int:
+        # High frequent words should be of 1 push (8 chances)
+        # Next we go to 2 pushes after 8 alphabets are completed
+        word_dct = Counter(word)
+        print(len(word))
+
+        # Initialize the total pushes
+        total_pushes = 0
+        
+        # Iterate through the sorted frequencies and calculate pushes
+        for idx, (char, freq) in enumerate(word_dct.most_common()):
+            if idx < 8:
+                total_pushes += freq * 1
+            elif idx < 16:
+                total_pushes += freq * 2
+            elif idx < 24:
+                total_pushes += freq * 3
+            else:
+                total_pushes += freq * 4
+        
+        return total_pushes
+
+
+
