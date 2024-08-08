@@ -1,0 +1,29 @@
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        # If it is visited -> mark "visited"
+        # Just like dfs we can do
+        # if you reached end, then find the direction where it is possible
+        
+        fin_lst = []
+        len_ = len(matrix)*len(matrix[0])
+        i, j = 0, 0
+        di, dj = 1, 0
+
+        for val in range(len_):
+            fin_lst.append(matrix[j][i])
+            matrix[j][i] = "."
+            if (not (0 <= i + di < len(matrix[0]) and  
+                    0 <= j+dj < len(matrix))  
+                    or matrix[j+dj][i+di] == "."):
+                di, dj = -dj, di            
+            i += di
+            j += dj
+
+        return fin_lst    
+
+
+
+
+
+
+        
