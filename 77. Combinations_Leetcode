@@ -1,0 +1,19 @@
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        # We have to use backtracking
+        results = []
+        tot_lst = list(range(1, n+1))
+
+        def recurse_comb(lst, i):
+            if len(lst) == k:
+                results.append(lst[:])
+                return
+            
+            if len(lst) < k:
+                for j in range(i, n):
+                    recurse_comb(lst + [tot_lst[j]], j + 1)
+            
+        recurse_comb([], 0)
+        return results
+
+
