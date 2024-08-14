@@ -1,0 +1,23 @@
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        # backtracking can be applied
+
+        fin_lst = [[]]
+        path = []
+
+        def recurse(path, start):
+            if start >= len(nums):
+                return
+
+            for i in range(start, len(nums)):
+                path.append(nums[i])
+                #print(path)
+                fin_lst.append(path.copy())
+                recurse(path, i+1)
+                # backtracking
+                path.pop()
+
+        recurse([], 0)
+        return fin_lst
+
+
