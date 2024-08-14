@@ -1,0 +1,30 @@
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        # Have to use backtracking for this
+        # generate paranthesis, combination sum I are already solved by me
+
+        candidates_sorted = sorted(candidates)
+        fin_lst = []
+
+        #[1,1,2,5,6,7,10]
+
+        def recurse(start, sm, path):
+            if sm == target:
+                fin_lst.append(path.copy())
+                return
+            if sm > target:
+                return            
+
+            for i in range(start, len(candidates_sorted)):
+                if i > start and candidates_sorted[i] == candidates_sorted[i - 1]:
+                    continue
+
+                path.append(candidates_sorted[i])
+                recurse(i + 1, sm + candidates_sorted[i], path)
+                # Backtrack
+                path.pop()                                
+
+        recurse(0, 0, [])
+        return fin_lst
+
+ 
