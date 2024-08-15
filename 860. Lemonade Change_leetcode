@@ -1,0 +1,42 @@
+class Solution:
+    def lemonadeChange(self, bills: List[int]) -> bool:
+        # bills[i] is either 5, 10, or 20.
+
+        five_stack = []
+        ten_stack = []
+        twenty_stack = []
+
+        for i in bills:
+            if i == 5:
+                five_stack.append(i)
+            elif i == 10:
+                if five_stack:
+                    five_stack.pop()
+                    ten_stack.append(i)
+                else:
+                    return False
+            elif i == 20:
+                curr_i = 20
+                twenty_stack.append(i)
+                if ten_stack:
+                    ten_stack.pop()
+                    curr_i = 10
+                if five_stack:
+                    if curr_i == 10:
+                        five_stack.pop()
+                    elif curr_i == 20:
+                        if len(five_stack) >= 3:
+                            five_stack.pop()
+                            five_stack.pop()
+                            five_stack.pop()
+                        else:
+                            return False                        
+                    else:
+                        return False
+                else:
+                    return False                    
+        return True
+
+
+
+
