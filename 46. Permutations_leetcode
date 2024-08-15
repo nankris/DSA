@@ -1,0 +1,20 @@
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        # Have to use backtracking
+        # Similar to this only i got in delta airlines
+        # Lets solve the LC 75, LC 150/Neetcode 150 for optimal solving of problems
+
+        res = []
+
+        def recurse(i):
+            if i == len(nums)-1:
+                res.append(nums[:])
+                return
+            for elem in range(i, len(nums)):
+                nums[i], nums[elem] = nums[elem], nums[i]
+                recurse(i+1)
+                nums[i], nums[elem] = nums[elem], nums[i]
+
+        recurse(0)
+        return res                                
+
