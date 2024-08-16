@@ -1,0 +1,26 @@
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        # Since the subset must not contain duplicate subsets we have to use set at the end?
+
+        nums = sorted(nums)
+
+        res = [[]]
+        if len(nums) == 1:
+            return [[],[nums[0]]]
+
+        def recurse(i, subset):
+            if i == len(nums):
+                return
+
+            for j in range(i, len(nums)):
+                if j > i and nums[j] == nums[j - 1]:
+                    continue
+
+                subset.append(nums[j])
+                res.append(subset[:])
+                recurse(j+1, subset)
+                subset.pop()
+       
+        recurse(0, [])
+        return res
+
