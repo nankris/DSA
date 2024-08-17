@@ -1,0 +1,34 @@
+class Solution:
+    def letterCasePermutation(self, s: str) -> List[str]:
+        # Convert string to list
+        s_lst = list(s)
+
+        #fin_lst = []
+        #for i in range(len(s_lst)):
+        #    fin_lst.append(s_lst[i].upper())
+
+        fin_lst = []
+        def recurse(i, sub_lst):
+            if i == len(s_lst):
+                fin_lst.append(''.join(sub_lst[:]))
+                return
+
+            if s_lst[i].isdigit():
+                sub_lst.append(s_lst[i])
+                recurse(i + 1, sub_lst)
+                sub_lst.pop()
+            else:
+                sub_lst.append(s_lst[i].lower())
+                recurse(i + 1, sub_lst)
+                sub_lst.pop()  # backtrack
+
+                sub_lst.append(s_lst[i].upper())
+                recurse(i + 1, sub_lst)
+                sub_lst.pop()
+
+        recurse(0, [])
+
+        return fin_lst
+        
+
+        
