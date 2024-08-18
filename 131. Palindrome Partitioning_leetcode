@@ -1,0 +1,30 @@
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        # So every substring must be palindrome?
+        # Create all substrings -> pass it to the palindrome function that checks validity of all stirngs
+        # Backtracking will work here as well
+        
+        fin_lst = []
+        def recurse(i, sub_lst):
+            if i == len(s):
+                fin_lst.append(sub_lst[:])
+            
+            for j in range(i, len(s)):
+                if s[i:j+1]==s[i:j+1][::-1]:
+                    sub_lst.append(s[i:j+1])
+                    recurse(j + 1, sub_lst)
+                    sub_lst.pop()
+
+        recurse(0, [])
+        return fin_lst
+
+
+
+
+
+
+
+
+
+
+
