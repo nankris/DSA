@@ -12,3 +12,27 @@ class Solution:
         
 
         return min(dp[0], dp[1])
+
+
+# With recursion and memoization
+class Solution:
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
+
+        def mincost(i, memo):
+            if i >= len(cost):
+                return 0
+            
+            # memoization
+            if i in memo:
+                return memo[i]
+            
+            step1 = cost[i] + mincost(i+1, memo)
+            step2 = cost[i] + mincost(i+2, memo)
+
+            memo[i] = min(step1, step2)
+
+            return memo[i]
+
+        memo = {}
+
+        return min(mincost(0, memo), mincost(1, memo))
