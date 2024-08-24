@@ -1,0 +1,15 @@
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        def totsteps(i, memo):
+            if i == 0:
+                return 1
+            if i == 1:
+                return 2
+            if i in memo:
+                return memo[i]
+            memo[i] = totsteps(i-1, memo) + totsteps(i-2, memo)
+            return memo[i]
+
+        memo = {}
+        return totsteps(n-1, memo)
+
