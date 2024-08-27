@@ -1,0 +1,29 @@
+class Solution:
+    def numDecodings(self, s: str) -> int:
+
+        def decode_ways(index, memo):
+            if index == len(s):
+                return 1        
+            if s[index] == '0':
+                return 0
+            if index in memo:
+                return memo[index]
+
+            # Case 1: Single character decoding
+            ways = decode_ways(index + 1, memo)
+            
+            # Case 2: Two characters decoding
+            if index + 1 < len(s) and '10' <= s[index:index+2] <= '26':
+                ways += decode_ways(index + 2, memo)
+
+            memo[index] = ways
+            return ways
+
+        memo = {}
+        return decode_ways(0, memo)            
+
+
+
+
+
+        
