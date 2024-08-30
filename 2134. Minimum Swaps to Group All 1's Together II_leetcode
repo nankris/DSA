@@ -1,0 +1,32 @@
+class Solution:
+    def minSwaps(self, nums: List[int]) -> int:
+        cnt = 0
+        for i in range(len(nums)):
+            if nums[i] == 1:
+                cnt += 1        
+
+        print(cnt)
+        # To avoid circular property
+        nums_new = nums + nums
+
+        left = 0 
+        right = 0
+        min_cnt = 99999
+        zero_cnt = 0
+        while right < len(nums_new):
+            if right - left == cnt:
+                if zero_cnt < min_cnt:
+                    min_cnt = zero_cnt
+                if nums_new[left] == 0:
+                    zero_cnt -= 1
+                left += 1
+
+            if nums_new[right] == 0:
+                zero_cnt += 1
+            right += 1
+
+        return min_cnt            
+
+
+
+
