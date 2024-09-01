@@ -1,0 +1,37 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+
+        # While traversing -> See if any node has exact value of the second tree node,
+        # If it is the case, then check if they both have exact same structure
+        # You can use, same trees problem approach here
+        self.subRootval = subRoot.val
+
+        def traverse(left_tree_node, right_tree_node):
+            if not left_tree_node and not right_tree_node:
+                return True
+            if not left_tree_node or not right_tree_node:
+                return False
+            if left_tree_node.val != right_tree_node.val:
+                return False
+            return traverse(left_tree_node.left, right_tree_node.left) and traverse(left_tree_node.right, right_tree_node.right)
+
+        self.cnt = 0
+        def intraverse(node):
+            if not node:
+                return False
+            if node.val == subRoot.val and traverse(node, subRoot):
+                return True
+
+            return intraverse(node.left) or intraverse(node.right)
+
+        return intraverse(root)
+
+
+
+
