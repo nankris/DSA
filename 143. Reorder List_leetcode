@@ -1,0 +1,51 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reorderList(self, head: Optional[ListNode]) -> None:
+        """
+        Do not return anything, modify head in-place instead.
+        """
+        
+        dummy = ListNode(0)
+        dummy.next = head
+
+        # Write your code here
+
+        # I thought of finding middle of ll (Slow and fast pointer)
+        # Then reversing second part (reversing ll)
+        # Then merging together (merging of two ll)
+
+        fast = dummy.next
+        slow = dummy.next
+
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        
+        print("middle ll value", slow.val)
+
+        # Reverse the ll after middle
+        second_head = slow.next
+        slow.next = None
+
+        new_list = None
+        current = second_head
+        while current:
+            next_node = current.next
+            current.next = new_list
+            new_list = current
+            current = next_node
+        
+        if new_list:
+            curr = dummy.next
+            while new_list:
+                next_node = curr.next
+                curr.next = new_list
+                new_list = new_list.next
+                curr.next.next = next_node
+                curr = next_node
+        
+        return dummy.next
