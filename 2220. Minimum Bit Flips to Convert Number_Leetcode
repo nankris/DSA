@@ -1,0 +1,7 @@
+class Solution:
+    def minBitFlips(self, start: int, goal: int) -> int:
+        # If we do xor operation between the start and goal
+        # The number of one's we get are the number of flips we have to do
+        res = start^goal
+        return bin(res).count('1')
+
