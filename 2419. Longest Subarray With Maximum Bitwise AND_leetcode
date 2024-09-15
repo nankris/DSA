@@ -1,0 +1,22 @@
+class Solution:
+    def longestSubarray(self, nums: List[int]) -> int:
+        # Get the highest number, and see if there are repeating chars
+        # Else just return the max value?
+        max_val = max(nums)
+
+        curr_max = -9999
+        cnt = 0
+        for i in nums:
+            if i == max_val:
+                cnt += 1
+                if cnt > curr_max:
+                    curr_max = cnt
+            else:
+                cnt = 0
+        
+        return curr_max
+
+
+
+
+        
