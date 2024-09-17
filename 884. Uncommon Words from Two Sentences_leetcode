@@ -1,0 +1,15 @@
+class Solution:
+    def uncommonFromSentences(self, s1: str, s2: str) -> List[str]:
+        # Creating two sets and subtracting them?
+        hash_map = {}
+        
+        for word in s1.split():
+            hash_map[word] = hash_map.get(word, 0) + 1
+        for word in s2.split():
+            hash_map[word] = hash_map.get(word, 0) + 1
+
+        op = [word for word, count in hash_map.items() if count == 1]
+
+        return op
+
+
