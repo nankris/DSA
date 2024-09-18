@@ -1,0 +1,31 @@
+class Solution:
+    def winnerOfGame(self, colors: str) -> bool:
+        # "ABBBBBBBAAA"
+        # "ABBBBBBBAAABBBAAAAAAAA"
+        # Lets calculate how many max each player can remove
+        # if each player removes equal then A looses, and B wins as first turn is A
+        # if A > B in terms of removes -> A Wins
+        # If B > A in terms of removes -> B Wins
+
+        # Calculate consecutive A's, B's and if A count > 2 (that consecutive number - 2 will be number)
+        cnt_a = 0
+        cnt_b = 0
+        tot_a = 0
+        tot_b = 0
+        for i in colors:
+            if i == 'A':
+                cnt_b = 0
+                cnt_a += 1
+                if cnt_a > 2:
+                    tot_a += 1
+            if i == 'B':
+                cnt_a = 0
+                cnt_b += 1
+                if cnt_b > 2:
+                    tot_b += 1
+
+        if tot_a > tot_b:
+            return True
+        if tot_a <= tot_b:
+            return False 
+
