@@ -1,0 +1,44 @@
+class Solution:
+    def arrayRankTransform(self, arr: List[int]) -> List[int]:
+        # Lets store ranks
+        #sorted_arr = sorted(arr)
+        sorted_arr = sorted(list(set(arr)))
+        rank_dct = {}
+        for i, val in enumerate(sorted_arr):
+            rank_dct[val] = i+1
+        
+        for index in range(len(arr)):
+            arr[index] = rank_dct[arr[index]]
+        return arr
+
+        # So if two elements are same rank must be same
+        # # Rank starts from same
+        # # This is just sorting right?
+        # # I stored indexes and then did the work
+        # # In the best solution they stored the ranks per element
+        # rank_lst = [0]*len(arr)
+
+        # index_dct = {}
+        # for i, elem in enumerate(arr):
+        #     if elem not in index_dct:
+        #         index_dct[elem] = [i] 
+        #     else:
+        #         index_dct[elem].append(i)
+
+        # sorted_arr = sorted(arr)
+
+        # rnk = 1
+        # j = 0
+        # while j < len(sorted_arr):
+        #     for dct_val in index_dct[sorted_arr[j]]:
+        #         if rank_lst[dct_val] == 0:
+        #             rank_lst[dct_val] = rnk
+        #     j += len(index_dct[sorted_arr[j]])
+        #     rnk += 1
+        # return rank_lst
+
+
+
+
+
+
