@@ -1,0 +1,15 @@
+class Solution:
+    def removeSubfolders(self, folder: List[str]) -> List[str]:
+        folder = sorted(folder)
+        fol_lst = []
+        fol_lst.append(folder[0].split('/'))
+
+        for fol in folder[1:]:
+            flag = False
+            for already_present in fol_lst:
+                if already_present == fol.split('/')[:len(already_present)]:
+                    flag = True
+            if not flag:
+                fol_lst.append(fol.split('/'))
+
+        return ['/'.join(elem) for elem in fol_lst]
