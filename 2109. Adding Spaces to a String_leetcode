@@ -1,0 +1,14 @@
+class Solution:
+    def addSpaces(self, s: str, spaces: List[int]) -> str:
+        new_str = ""
+        curr_index = 0
+        for i in range(len(s)):
+            print(i, curr_index)
+            if curr_index < len(spaces) and i == spaces[curr_index]:
+                new_str += " " + s[i]
+                curr_index += 1
+            else:
+                new_str += s[i]
+        
+        return new_str
+
