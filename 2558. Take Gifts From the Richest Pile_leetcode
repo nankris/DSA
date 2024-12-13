@@ -1,0 +1,13 @@
+class Solution:
+    def pickGifts(self, gifts: List[int], k: int) -> int:
+
+        heap_ = []
+        for i in range(len(gifts)):
+            heapq.heappush(heap_, -gifts[i])
+
+        for i in range(k):
+            curr_largest = heapq.heappop(heap_)
+            new_val = int(math.sqrt(abs(curr_largest)))
+            heapq.heappush(heap_, -new_val)
+
+        return math.floor(abs(sum(heap_)))
