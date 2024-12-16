@@ -1,0 +1,20 @@
+class Solution:
+    def getFinalState(self, nums: List[int], k: int, multiplier: int) -> List[int]:
+        fin_nums = [0]*len(nums)
+        heap_ = []
+        for index, val in enumerate(nums):
+            heap_.append((val, index))
+        
+        heapq.heapify(heap_)
+
+        for i in range(k):
+            curr_min, index = heapq.heappop(heap_)
+            heapq.heappush(heap_, (curr_min*multiplier, index))
+
+        for curr_val, curr_index in heap_:
+            fin_nums[curr_index] = curr_val
+        
+        return fin_nums
+
+
+        
