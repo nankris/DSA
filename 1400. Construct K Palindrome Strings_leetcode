@@ -1,0 +1,23 @@
+class Solution:
+    def canConstruct(self, s: str, k: int) -> bool:
+        if len(s) < k:
+            return False
+        
+        freq = Counter(s)
+        cnt = 0
+        for val in freq:
+            if freq[val]%2 != 0:
+                cnt += 1
+        if cnt > k:
+            return False
+        else:
+            return True
+
+
+
+
+
+
+
+
+
