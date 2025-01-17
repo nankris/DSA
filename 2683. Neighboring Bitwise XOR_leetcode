@@ -1,0 +1,11 @@
+class Solution:
+    def doesValidArrayExist(self, derived: List[int]) -> bool:
+        # if we do multiple such xor operations -> the original should come, else it is false?
+        # or xor sum should be 0
+        fin_xor = 0
+        for i in derived:
+            fin_xor ^= i
+        if fin_xor == 0:
+            return True
+        return False
+
