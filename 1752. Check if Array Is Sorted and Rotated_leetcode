@@ -1,0 +1,21 @@
+class Solution:
+    def check(self, nums: List[int]) -> bool:
+        # les les great les les
+        # great, les, les, les, great
+        # les, les, great
+        # if you get more than 1 great -> it is false?
+        great_cnt = 0
+        curr_val = nums[0]
+        for val in nums[1:]:
+            if curr_val > val:
+                great_cnt += 1
+            curr_val = val
+
+        if curr_val > nums[0]:
+            great_cnt += 1
+
+        if great_cnt > 1:
+            return False
+        return True
+
+
