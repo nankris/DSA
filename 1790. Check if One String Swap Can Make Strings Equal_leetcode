@@ -1,0 +1,20 @@
+class Solution:
+    def areAlmostEqual(self, s1: str, s2: str) -> bool:
+        if len(s1) != len(s2):
+            return False
+        if s1 == s2:
+            return True
+        inequal_cnt = 0
+        inequal_index = []
+        for i in range(len(s1)):
+            if s1[i] != s2[i]:
+                inequal_cnt += 1
+                inequal_index.append(i)
+        if inequal_cnt == 2:
+            if s1[inequal_index[0]] == s2[inequal_index[1]]:
+                if s2[inequal_index[0]] == s1[inequal_index[1]]:
+                    return True
+        return False
+
+
+
