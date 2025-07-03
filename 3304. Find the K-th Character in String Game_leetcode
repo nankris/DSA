@@ -1,0 +1,17 @@
+class Solution:
+    def kthCharacter(self, k: int) -> str:
+        next_char_dct= {}
+        next_char_dct = {chr(c): chr(c+1) for c in range(ord('a'), ord('z'))}
+        next_char_dct['z'] = 'a'
+
+        def perform_append(strng):
+            to_append = ''
+            for char in strng:
+                to_append += next_char_dct[char]
+            return strng + to_append
+        
+        curr_str = 'a'
+        while len(curr_str) < k:
+            curr_str = perform_append(curr_str)
+        return curr_str[k-1]
+
