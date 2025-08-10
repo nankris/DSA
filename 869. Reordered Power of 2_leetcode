@@ -1,0 +1,12 @@
+class Solution:
+    def reorderedPowerOf2(self, n: int) -> bool:
+        # so 2 power 29 is less than 10 power 9
+        two_powers = {}
+        for i in range(0,30):
+            two_powers[int(''.join(sorted(str(2**i), reverse=True)))] = True
+
+        if int(''.join(sorted(str(n), reverse=True))) in two_powers.keys():
+            return True        
+
+        return False
+
