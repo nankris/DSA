@@ -1,0 +1,47 @@
+class Solution:
+    def countMaxOrSubsets(self, nums: List[int]) -> int:
+        # max possible bitwise - or
+        # 0011 or 1100 -> 1111
+
+        # [3,2,1,5]
+        # 011, 010, 001, 101 
+
+        # if you OR everything, then whatever value you get, that's the max you can get
+
+        # get all teh subsets and then OR the final list and compare the value with max value
+
+        max_or = 0
+        for i in nums:
+            max_or = max_or | i
+        #print(max_or)
+
+        fin_lst = [[]]
+        path = []
+        def recurse(path, start):
+            if start >= len(nums):
+                return
+            for i in range(start, len(nums)):
+                path.append(nums[i])
+                #print(path)
+                fin_lst.append(path.copy())
+                recurse(path, i+1)
+                # backtracking
+                path.pop()
+        recurse([], 0)       
+        #return fin_lst
+
+        #print(fin_lst)
+
+        tot_cnt = 0
+        for lst in fin_lst:
+            curr_val = reduce(lambda x, y: x | y, lst, 0)
+            if curr_val == max_or:
+                tot_cnt += 1
+
+        return tot_cnt
+
+
+
+
+
+        
