@@ -1,0 +1,17 @@
+class Solution:
+    def lastStoneWeight(self, stones: List[int]) -> int:
+        # Creating max heap will work
+        neg_stones = [-n for n in stones]
+        heapq.heapify(neg_stones)
+        while len(neg_stones) > 1:
+            first_stone = heapq.heappop(neg_stones)
+            second_stone = heapq.heappop(neg_stones)
+
+            if first_stone == second_stone:
+                continue
+            if first_stone <= second_stone:
+                heapq.heappush(neg_stones, -second_stone+first_stone)
+        
+        if neg_stones:
+            return abs(neg_stones[0])
+        return 0
